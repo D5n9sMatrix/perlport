@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+user=$( dialog --stdout --menu 'select:' 0 0 0   1 first 2 two 3 third )
+echo your put select $user

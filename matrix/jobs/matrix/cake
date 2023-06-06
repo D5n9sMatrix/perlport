@@ -1,0 +1,41 @@
+#!/bin/bash
+# cake - the script of the aunt who needs to use the computer
+# This script is part of http://aurelio.net/shell/dialog
+#
+# Example of how to tie the script to a main menu using
+# the 'while'. The 'case' is used to identify what the action was
+# chosen. After each action, it always returns to the menu.
+# main. It only exits the script if you choose the last option,
+# press cured or ESC.
+#
+# Useful to use as login shell for inexperienced people or
+# make restricted and defined actions utilities.
+#
+# FLOWCHART
+#                      START END
+# +-----------+ +----------+
+# +------> | menu |--Esc-----> | comes out of the |
+# | | main |--cured--> | program |
+# | +-----Ok----+ +--> +----------+
+# | | |
+# +--<--1 2 3-4--+--Zero--->---+
+#
+
+    # Shows the on-screen menu, with available actions
+    answer=$(
+      dialog --stdout \
+             --title 'Cake Menu' \
+             --menu 'Hi cake, select items:' \
+            0 0 0 \
+            1 'Internet Browser' \
+            2 'Check Browser Files' \
+            3 'Source Porject' \
+            4 'Connect Jobs' \
+            0 'Out')
+
+
+
+# Final message :)
+echo 'Thank you Cake!'
+clear
+ 

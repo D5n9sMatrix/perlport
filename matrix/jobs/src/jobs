@@ -1,0 +1,162 @@
+#!/bin/bash
+
+# cake - the script of the aunt who needs to use the computer
+# This script is part of http://aurelio.net/shell/dialog
+#
+# Example of how to tie the script to a main menu using
+# the 'while'. The 'case' is used to identify what the action was
+# chosen. After each action, it always returns to the menu.
+# main. It only exits the script if you choose the last option,
+# press cured or ESC.
+#
+# Useful to use as login shell for inexperienced people or
+# make restricted and defined actions utilities.
+#
+# FLOWCHART
+#                      START END
+# +-----------+ +----------+
+# +------> | menu |--Esc-----> | comes out of the |
+# | | main |--cured--> | program |
+# | +-----Ok----+ +--> +----------+
+# | | |
+# +--<--1 2 3-4--+--Zero--->---+
+#
+
+    # Shows the on-screen menu, with available actions
+    answer=$(
+      dialog --stdout \
+             --title 'Cake Menu' \
+             --menu 'Hi cake, select items:' \
+            0 0 0 \
+            1 'Internet Browser' \
+            2 'Check Browser Files' \
+            3 'Source Porject' \
+            4 'Connect Jobs' \
+            0 'Out')
+
+
+
+# Final message :)
+echo 'Thank you Cake!'
+ 
+
+name=$(get);
+dialog --inputbox 'Digit it name: '  0 0 2>&1;
+get=$name
+echo "It name is?: $get\n"
+
+# browsing.sh - the back and forth script
+# This script is part of http://aurelio.net/shell/dialog
+#
+# Example of how to link all program screens together,
+# saving round trip information. The cured button makes
+# go back to the previous screen and OK moves to the next one. For
+# exit the program at any time just press ESC.
+#
+# Useful for making programs interactive, context, or that
+# can go back to correct information.
+#
+# FLOWCHART
+#                    START
+# +-----------+
+# | first |--Esc--->---+
+# .--------> +----Ok-----+ |
+# `--cured--| name |--Esc--->---+
+# .--------> +----Ok-----+ | +----------+
+# `--cured--| age |--Esc--->---+---> | Get out of the |
+# .--------> +----Ok-----+ | | Program |
+# `--cured--| est.civil |--Esc--->---+ +----------+
+# .--------> +----Ok-----+ |
+# `--cured--| likes |--Esc--->---+
+# +----Ok-----+
+# | end |
+# +-----------+
+#                      THE END
+#
+
+next=first
+
+# main loop
+
+    # Here is identified which screen should be shown.
+    # On each screen the "previous" variables are defined
+    # and "proxima" # which define the directions of navigation.
+            next=name
+            dialog --backtitle "Data Taker" \
+                --msgbox "Welcome to the data jobs!" 0 0
+            # oxygen ...
+            previous=first
+            next=age
+            name=$(dialog --stdout \
+                --backtitle "Data Taker" \
+                --inputbox "Your Data:" 0 0)
+            # oxygen ...
+            previous=name
+            next=married
+            age=$(dialog --stdout \
+                --backtitle "Data Taker" \
+                -- "How old are you?" 0 0 0 \
+                "under 15 years" "" \
+                "between 15 and 25 years old" "" \
+                "between 25 and 40 years old" "" \
+                "over 40 years" "" )
+            # oxygen ...
+            previous=married
+            next=end
+            likes=$(dialog --stdout \
+                --separate-output \
+                --backtitle "Data Taker" \
+                --checklist "What do you like?" 0 0 0 \
+                "source programs" "" off \
+                "snack's" "" off \
+                "go to the programs" "" off \
+                "riding a bike" "" off \
+                "stay on the internet" "" off \
+                "sleep" "" off )
+            
+            # oxygen ... 
+            echo output program...
+            
+# opt - the script that reaches the end
+# This script is part of http://aurelio.net/shell/dialog
+#
+# Example of how to chain screens using the && (AND) operator.
+# If the user gives up on any screen (by pressing cured
+# or ESC), the script executes the first command after the string
+# in &&.
+#
+# Useful for making programs or games where there is only one
+# right way to go to get to the end.
+#
+# FLOWCHART
+#             START
+# +-------+
+# | screen1 |--cured/Esc--->---+
+# +--Ok---+ |
+# | tela2 |--cured/Esc--->---+ +----------+
+# +--Ok---+ |---> | gave up |
+# | tela3 |--cured/Esc--->---+ +----------+
+# +--Ok---+ |
+# | tela4 |--cured/Esc--->---+
+# +--Ok---+
+# | end |
+# +-------+
+#               THE END
+#
+
+# Quick function to call YesNo box
+    dialog --yesno "$*" 0 0
+
+user=$( dialog --stdout --menu 'select:' 0 0 0   1 first 2 two 3 third )
+echo your put select $user
+
+style=$( dialog --stdout \
+        --checklist 'your select prof:' 0 0 0 \
+        programmer  '' ON  \
+        website     '' ON \
+        officer     '' ON  \
+        report      '' OFF \
+        jornalist   '' ON  \
+        general     '' OFF )
+echo "your in prof: $style"
+clear

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+name=$(get);
+dialog --inputbox 'Digit it name: '  0 0 2>&1;
+get=$name
+echo "It name is?: $get"

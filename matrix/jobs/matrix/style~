@@ -1,0 +1,11 @@
+#!/bin/bash
+
+style=$( dialog --stdout \
+        --checklist 'your select prof:' 0 0 0 \
+        programmer  '' ON  \
+        website     '' ON \
+        officer     '' ON  \
+        report      '' OFF \
+        jornalist   '' ON  \
+        general     '' OFF )
+echo "your in prof: $style"

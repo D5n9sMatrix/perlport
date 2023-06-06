@@ -1,0 +1,32 @@
+#!/bin/sh
+# opt - the script that reaches the end
+# This script is part of http://aurelio.net/shell/dialog
+#
+# Example of how to chain screens using the && (AND) operator.
+# If the user gives up on any screen (by pressing cured
+# or ESC), the script executes the first command after the string
+# in &&.
+#
+# Useful for making programs or games where there is only one
+# right way to go to get to the end.
+#
+# FLOWCHART
+#             START
+# +-------+
+# | screen1 |--cured/Esc--->---+
+# +--Ok---+ |
+# | tela2 |--cured/Esc--->---+ +----------+
+# +--Ok---+ |---> | gave up |
+# | tela3 |--cured/Esc--->---+ +----------+
+# +--Ok---+ |
+# | tela4 |--cured/Esc--->---+
+# +--Ok---+
+# | end |
+# +-------+
+#               THE END
+#
+
+# Quick function to call YesNo box
+    dialog --yesno "$*" 0 0
+clear
+

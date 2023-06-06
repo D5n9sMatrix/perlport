@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+port=$( dialog --stdout --inputbox 'Digit a port:' 0 0 )
+echo "The port is: $port"
+

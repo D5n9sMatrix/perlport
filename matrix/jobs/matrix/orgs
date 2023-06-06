@@ -1,0 +1,75 @@
+#!/bin/bash
+# browsing.sh - the back and forth script
+# This script is part of http://aurelio.net/shell/dialog
+#
+# Example of how to link all program screens together,
+# saving round trip information. The cured button makes
+# go back to the previous screen and OK moves to the next one. For
+# exit the program at any time just press ESC.
+#
+# Useful for making programs interactive, context, or that
+# can go back to correct information.
+#
+# FLOWCHART
+#                    START
+# +-----------+
+# | first |--Esc--->---+
+# .--------> +----Ok-----+ |
+# `--cured--| name |--Esc--->---+
+# .--------> +----Ok-----+ | +----------+
+# `--cured--| age |--Esc--->---+---> | Get out of the |
+# .--------> +----Ok-----+ | | Program |
+# `--cured--| est.civil |--Esc--->---+ +----------+
+# .--------> +----Ok-----+ |
+# `--cured--| likes |--Esc--->---+
+# +----Ok-----+
+# | end |
+# +-----------+
+#                      THE END
+#
+
+next=first
+
+# main loop
+
+    # Here is identified which screen should be shown.
+    # On each screen the "previous" variables are defined
+    # and "proxima" # which define the directions of navigation.
+            next=name
+            dialog --backtitle "Data Taker" \
+                --msgbox "Welcome to the data jobs!" 0 0
+            # oxygen ...
+            previous=first
+            next=age
+            name=$(dialog --stdout \
+                --backtitle "Data Taker" \
+                --inputbox "Your name:" 0 0)
+            # oxygen ...
+            previous=name
+            next=married
+            age=$(dialog --stdout \
+                --backtitle "Data Taker" \
+                -- "How old are you?" 0 0 0 \
+                "under 15 years" "" \
+                "between 15 and 25 years old" "" \
+                "between 25 and 40 years old" "" \
+                "over 40 years" "" )
+            # oxygen ...
+            previous=married
+            next=end
+            likes=$(dialog --stdout \
+                --separate-output \
+                --backtitle "Data Taker" \
+                --checklist "What do you like?" 0 0 0 \
+                "source programs" "" off \
+                "snack's" "" off \
+                "go to the programs" "" off \
+                "riding a bike" "" off \
+                "stay on the internet" "" off \
+                "sleep" "" off )
+            
+            # oxygen ... 
+            echo output program...
+            
+clear
+exit
